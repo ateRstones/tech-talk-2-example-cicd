@@ -7,10 +7,10 @@ services:
     image: 'gitlab/gitlab-ce:latest'
     restart: always
     container_name: gitlab-web
-    hostname: 'localhost'
+    hostname: 'gitlab-web'
     environment:
       GITLAB_OMNIBUS_CONFIG: |
-        external_url 'http://localhost'
+        external_url 'http://gitlab-web'
         gitlab_rails['gitlab_shell_ssh_port'] = 2222
     ports:
       - "80:80"
@@ -35,7 +35,7 @@ services:
      - ./config/gitlab-runner:/etc/gitlab-runner
      - /var/run/docker.sock:/var/run/docker.sock
     networks:
-        - gitlab-network
+      - gitlab-network
 
 networks:
   gitlab-network:

@@ -1,5 +1,9 @@
 # Minimal Example CI/CD Setup
 ## Gitlab Setup
+First: Because of the networking setup for the example gitlab, we have to register the hostname gitlab-web to point to localhost. On linux we can do this by adding a line to the `/etc/hosts` file:
+
+    grep -q "127.0.0.1 gitlab-web" /etc/hosts || echo "127.0.0.1 gitlab-web" | sudo tee -a /etc/hosts
+
 To run the example Gitlab with Runner Setup first run (need to have docker and docker compose installed and running):
 
     docker compose -f setup/docker-compose.yml up -d
@@ -8,7 +12,7 @@ The first run might take some time, as the gitlab image is quite big and gitlab 
 
     docker ps
 
-Then login into the gitlab server at [http://localhost](http://localhost) using the user `root`. The password can be found out by running the following command as it is randomly generated:
+Then login into the gitlab server at [http://gitlab-web](http://gitlab-web) using the user `root`. The password can be found out by running the following command as it is randomly generated:
 
     docker exec gitlab-web cat /etc/gitlab/initial_root_password
 
@@ -23,3 +27,8 @@ First add your public ssh key to the admin account ([Gitlab documentation](https
 
 In the gitlab UI, create a new, blank project. Be sure to uncheck "Initialize repository with a README".  
 Follow the add files SSH instructions for an existing folder and switch to this repository. Change "origin" to "remote" in the commands.
+
+Push the git repository and check on the project page. A blue circle should appear, which indicates a pipeline is running. Further the pipeline can be found in the CI/CD section.
+Further new pipelines can be created to run it again. The pipeline will run on every commit (with the default example).
+
+The pipeline definition is found in the `.gitlab-ci.yml` file. It build the docker container according to the docker build file (`Dockerfile`).
