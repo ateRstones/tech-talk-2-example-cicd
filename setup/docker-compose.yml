@@ -12,10 +12,10 @@ services:
       GITLAB_OMNIBUS_CONFIG: |
         external_url 'http://gitlab-web.local'
         gitlab_rails['gitlab_shell_ssh_port'] = 2222
-        registry_external_url 'http://gitlab-web.local:5050'
+        registry_external_url 'http://gitlab-web.home:5050'
         registry['enable'] = true
         gitlab_rails['registry_port'] = "5050"
-        gitlab_rails['registry_host'] = "gitlab-web.local"
+        gitlab_rails['registry_host'] = "gitlab-web.home"
     ports:
       - "80:80"
       - "443:443"
@@ -28,6 +28,7 @@ services:
       gitlab-network:
         aliases:
           - gitlab-web.local
+          - gitlab-web.home
 
   # RUNNER
   gitlab-runner1:
