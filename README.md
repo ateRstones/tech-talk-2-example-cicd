@@ -1,8 +1,8 @@
 # Minimal Example CI/CD Setup
 ## Gitlab Setup
-First: Because of the networking setup for the example gitlab, we have to register the hostname gitlab-web to point to localhost. On linux we can do this by adding a line to the `/etc/hosts` file:
+First: Because of the networking setup for the example gitlab, we have to register the hostname gitlab-web.local to point tohost. On linux we can do this by adding a line to the `/etc/hosts` file:
 
-    grep -q "127.0.0.1 gitlab-web" /etc/hosts || echo "127.0.0.1 gitlab-web" | sudo tee -a /etc/hosts
+    grep -q "127.0.0.1 gitlab-web.local" /etc/hosts || echo "127.0.0.1 gitlab-web.local" | sudo tee -a /etc/hosts
 
 To run the example Gitlab with Runner Setup first run (need to have docker and docker compose installed and running):
 
@@ -12,7 +12,7 @@ The first run might take some time, as the gitlab image is quite big and gitlab 
 
     docker ps
 
-Then login into the gitlab server at [http://gitlab-web](http://gitlab-web) using the user `root`. The password can be found out by running the following command as it is randomly generated:
+Then login into the gitlab server at [http://gitlab-web.local](http://gitlab-web.local) using the user `root`. The password can be found out by running the following command as it is randomly generated:
 
     docker exec gitlab-web cat /etc/gitlab/initial_root_password
 

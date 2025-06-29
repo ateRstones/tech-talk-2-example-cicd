@@ -2,13 +2,13 @@
 # from https://gist.github.com/benoitpetit/cbe19cdd369ec8c1e0defd245d91751f
 ###################################################################
 # Récuperer le token d'enregistrement du runner via ce lien:
-# http://localhost/root/${project}/settings/ci_cd
+# http:/host/root/${project}/settings/ci_cd
 # Benoit Petit: https://github.com/benoitpetit
 ###################################################################
 
 # modifier avec votre token
 registration_token=$1
-url=http://gitlab-web
+url=http://gitlab-web.local
 
 docker exec -it gitlab-runner1 \
   gitlab-runner register \

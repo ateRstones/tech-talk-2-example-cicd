@@ -9,5 +9,7 @@ build-job:
   stage: build
   script:
     - docker build . -t $DOCKER_IMAGE:$DOCKER_TAG 
+    - nslookup gitlab-web.local
+    - ip a
     - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
     - docker push $DOCKER_IMAGE:$DOCKER_TAG
